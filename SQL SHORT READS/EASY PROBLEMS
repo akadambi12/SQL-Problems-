@@ -1,1 +1,172 @@
+Problem 1
+Retrieve all employee’s first names from the employees table.
+
+SELECT e.first_name
+FROM employees as e;
+
+
+Problem 2
+Retrieve the employee ID, hire date, and the job ID for each employee.
+
+SELECT e.employee_id, e.hire_date, e.job_id
+FROM employees as e;
+
+
+Problem 3
+Retrieve the department ID, department name, manager ID, and location ID for each department.
+
+SELECT *
+FROM department;
+
+
+Problem 4
+Retrieve all employee IDs. Rename this column to read as “worker_id.”
+
+SELECT e.employee_id AS worker_id
+FROM employees AS e;
+
+
+Problem 5
+For each job, retrieve the job code, job title, minimum salary, and maximum salary. Rename these columns to read as job_code, title, minimum_salary, and maximum_salary, respectively.
+
+SELECT j.job_id AS job_code, j.job_title AS title, j.min_salary AS minimum_salary, j.max_salary AS maximum_salary
+FROM jobs AS j;
+
+
+Problem 6: Retrieve the job ID, job title, maximum salary, minimum salary, and salary range for each job. Salary range is defined as the difference between the maximum salary and minimum salary. Alias the difference as “salary_range.”
+
+SELECT j.job_id , j.job_title , j.min_salary, j.max_salary, j.max_salary-j.min_salary AS salary_range
+FROM jobs AS j;
+
+
+Problem 7
+Retrieve the country id and country name for each country.
+
+SELECT DISTINCT c.country_id, c.country_name 
+FROM countries;
+
+
+Problem 8
+Retrieve the employee ID, email, and phone number for each employee.
+
+SELECT e.employee_id, e.email, e.phone_number
+FROM employees AS e;
+
+
+Problem 9
+Retrieve the job ID, job title, and minimum salary for each job at the company.
+
+SELECT j.job_id,	j.job_title, j.min_salary
+FROM jobs AS j;
+
+
+Problem 10
+Retrieve the location ID, city, and state/province for all warehouse/department locations.
+
+SELECT l.location_id, l.city, l.state_province
+FROM locations AS l;
+
+
+Problem 11
+Retrieve the location ID, street address, city, and state/province for departments or warehouses located in Texas.
+
+Solution:
+SELECT l.location_id,	l.street_address, l.city, l.state_province
+FROM locations AS l
+WHERE l.state_province = 'Texas';
+
+
+Problem 12
+Retrieve the employee ID, job ID, and hire date for employees hired in year 2007 or later.
+
+SELECT e.employee_ID, e.job ID, e.hire_date
+FROM employees AS e
+WHERE e.hire_date>= '2007';
+
+
+Problem 13
+Retrieve the department ID, department name, and location ID for departments/warehouses with location IDs other than 1700.
+
+SELECT d.department _ID, d.department_name, and d.location_ID
+FROM departments AS d
+WHERE d.location_ID != '1700' ;
+
+
+Problem 14
+Retrieve the employee ID, first name, last name, and job ID for each programmer (i.e., those employees with a job ID of “IT_PROG.”
+
+SELECT e.employee_ID, e.first_name, e.last_name, e.job_ID
+FROM employees as e
+WHERE e.job_ID='IT_PROG' ;
+
+
+Problem 15
+Retrieve the location ID, city, and state/province, and country ID for department/warehouse locations outside of the United States.
+
+SELECT l.Location_id, l.city, l.state_province, l.country_id
+FROM locations AS l
+WHERE l.country_id != 'US' ;
+
+
+Problem 16
+Retrieve the employee ID, job ID, and salary for employees with a salary of greater than or equal to $10,000.
+
+SELECT e.employee_id, e.job_id, e.salary 
+FROM employees AS e
+WHERE e.salary >= 10000 ;
+
+
+Problem 17
+Retrieve the location ID, city, state/province, and country ID for department/warehouse locations in the United States or Canada.
+
+SELECT l.location_id, l.city, l.state_province, l.country_id
+FROM locations AS l
+WHERE l.country_id ='US' OR l.country_id='CA' ;
+
+ALternate Answer: SELECT l.location_id, l.city, l.state_province, l.country_id
+FROM locations AS l
+WHERE l.country_id IN ('US','CA'); 
+
+
+
+Problem 18
+Retrieve the location ID, city, state/province, and country ID for department/warehouse locations outside the United States and Canada.
+
+SELECT l.location_id, l.city, l.state_province, l.country_id
+FROM locations AS l
+WHERE l.country_id NOT IN ('US' , 'CA') ;
+
+
+Problem 19
+Retrieve the employee ID and salary for all associates with a salary between $6,000 and $10,000, inclusive.
+
+SELECT e.employee_id, e.salary 
+FROM employees AS e
+WHERE e.salary BETWEEN 6000 AND 10000;
+
+
+Problem 20
+Retrieve the employee ID, first name, last name, job ID, hire date, and salary for all employees hired between 2004 and 2006, inclusive.
+
+SELECT e.employee_id, e.frist_name, e.last_name, e.hire_date, e.salary 
+FROM employees as e
+WHERE e.hire_date BETWEEN '01-JAN-2004' AND '31-DEC-2006' ;
+
+
+Problem 21
+Retrieve the employee ID, job ID, and salary for employees with job IDs other than IT_PROG, SA_MAN, and PU_CLERK.
+
+SELECT e.employee_id, e.job_id, e.salary 
+FROM employees AS e
+WHERE e.job_id NOT IN ('IT_PROG' , 'SA_MAN', 'PU_CLERK');
+
+
+Problem 22
+Retrieve the employee ID, job ID, hire date, and salary for employees with salaries between $15,000 and $30,000, inclusive.
+
+SELECT e.employee_id, e.job_id, e.hire_date, e.salary 
+FROM employees AS e
+WHERE e.salary BETWEEN 15000 AND 30000;
+
+
 
