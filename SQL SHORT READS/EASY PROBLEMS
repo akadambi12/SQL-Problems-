@@ -169,4 +169,81 @@ FROM employees AS e
 WHERE e.salary BETWEEN 15000 AND 30000;
 
 
+Problem 23
+Retrieve the employee ID and first names of employees with a first name starting with the letter ‘A.’
+
+SELECT e.employee_id, e.first_name
+FROM employees AS e
+WHERE e.first_name LIKE 'A%';
+
+
+Problem 24
+Retrieve the employee ID and first names of employees with a first name starting with the letter ‘C’ followed by any sequence of characters and ending with the letter ‘s.’
+SELECT e.employee_id, e.first_name
+FROM employees AS e
+WHERE e.first_name LIKE 'C%s';
+
+
+Problem 25
+Retrieve employee phone numbers where the first digit is a 5, 3rd to last digit is a 1, second to last digit is any number, and the final digit is a 9.
+
+SELECT e.phone_number
+FROM employees AS e
+WHERE e.phone_number LIKE '5%1_9' ; 
+
+
+Problem 26
+Retrieve the employee ID and last name of employees with a last name not starting with the letter ‘B.’
+
+SELECT e.employee_id, e.last_name
+FROM employees AS e
+WHERE e.last_name NOT LIKE 'B%' ;
+
+
+Problem 27
+Retrieve all employee IDs for employees with a phone number containing the sequence of digits, 423.
+
+SELECT e.employee_id 
+FROM employees AS e
+WHERE e.phone_number LIKE '%423%' ; 
+
+
+Problem 28
+Retrieve the employee ID and job ID for those employees with job IDs starting with the letters ‘AD.’
+
+SELECT e.employee_id, e.job_id
+FROM employees AS e 
+WHERE e.job_id LIKE 'AD%' ; 
+
+
+Problem 29
+Retrieve the employee ID and salary for employees with a salary starting with the 1 digit followed by a single digit of any value and ending with 3 zeros (e.g., 14000).
+
+SELECT e.employee_id, e.salary
+FROM employees AS e
+WHERE e.salary LIKE '1_000';
+
+
+Problem 30
+Retrieve the country ID and country name for country names starting with ‘A’ and ending in ‘a.’
+SELECT c.country_id, c.country_name
+FROM countries AS c
+WHERE c.country_name LIKE 'A%a';
+
+
+Problem 31
+Retrieve the employee ID and phone number of employees where the phone number doesn’t begin with ‘650.’
+
+SELECT e.employee_id,e.phone_number
+FROM employees AS e
+WHERE e.phone_number NOT LIKE '650%';
+
+
+
+
+
+
+
+
+
 
