@@ -239,6 +239,182 @@ FROM employees AS e
 WHERE e.phone_number NOT LIKE '650%';
 
 
+Problem 32
+Retrieve the department ID, department name, and manager ID for departments without a manager ID assigned.
+
+SELECT d.department_id, d.department_name, d.manager_id 
+FROM departments AS d
+WHERE d.manager_id IS NULL;
+
+
+Problem 33
+Retrieve the department ID, department name, and manager ID for departments with a manager ID assigned.
+
+SELECT d.department_id, d.department_name, d.manager_id
+FROM departments AS d
+WHERE d.manager_id IS NOT NULL;
+
+
+Problem 34
+Retrieve the employee ID and commission percentage for those employees with existing commission percentages
+
+SELECT e.employee_id, e.commission_pct
+FROM employees AS e
+WHERE e.commission_pct IS NOT NULL;
+
+
+Problem 35
+Retrieve the employee ID and commission percentage for those employees with non-existing commission percentages.
+
+SELECT e.employee_id, e.commission_pct
+FROM employees AS e
+WHERE e.commission_pct IS NULL ;
+
+
+Problem 36
+Retrieve the employee ID, job ID, salary, and manager ID for all employees with a manager ID of 100 or 108 and a salary greater than $12,000.
+
+SELECT e.employee_id, e.job_id, e.manager_id, e.salary 
+FROM employees AS e
+WHERE e.salary>12000 AND e.manager_id IN (100,108);
+
+
+Problem 37
+Retrieve the job ID, job title, minimum salary, and maximum salary for management jobs or those jobs with a minimum salary greater than 20,000 and a maximum salary greater than 25,000.
+
+SELECT j.job_id, j.job_title,	j.min_salary,	j.max_salary
+FROM jobs AS j
+WHERE j.job_title LIKE '%Manager%' OR (j.min_salary>20000 AND j.max_salary>25000) ;
+
+
+Problem 38
+Retrieve the employee ID, job ID, and department ID employees for employees that meet one or more of the following conditions:
+Department ID is equal to 90 and the job ID is equal to ‘AD_PRES’
+Department ID is equal to 100 and the job ID is equal to ‘FI_ACCOUNT’
+Employee ID is equal to 115
+
+SELECT e.employee_id, e.job_id, e.department _id
+FROM employees AS e
+WHERE (e.department _id=90 AND e.job_id =‘AD_PRES’) OR 
+      (e.department _id=100 AND e.job_id =‘FI_ACCOUNT’) OR 
+       e.employee_id=115 ;                                          * *assuming 115 is not string. 
+
+
+Problem 39
+Retrieve the employee ID, hire date, job ID, and salary for employees hired on as programmers in year 2007.
+
+SELECT e.employee_id, e.hire_date, e.job_id, e.salary
+FROM employees AS e
+WHERE YEAR(e.hire_date) = 2007 AND e.job_id='IT_PROG' ; 
+
+
+Problem 40
+Retrieve the employee ID, hire date, job ID, and salary for employees that were hired on as programmers or in the year 2007.
+
+SELECT e.employee_id, e.hire_date, e.job_id, e.salary
+FROM employees AS e
+WHERE YEAR(e.hire_date)=2007 OR e.job_id='IT_PROG';
+
+
+Problem 41
+Retrieve the employee ID, hire date, job ID, and salary for employees that were hired in year 2007 or were hired on as programmers with a salary greater than 5000.
+
+SELECT e.employee_id, e.hire_date, e.job_id, e.salary
+FROM employees AS e
+WHERE YEAR(e.hire_date)=2007 OR (e.job_id='IT_PROG' AND e.salary>5000);
+
+
+Problem 42
+Retrieve the employee ID, hire date, job ID, manager ID, and salary for employees that were hired in year 2007 or were hired on as programmers with a salary greater than 5000 or employees without a manager ID assigned and with a salary greater than 5000.
+
+
+SELECT e.employee_id, e.hire_date, e.job_id, e.salary 
+FROM employees AS e
+WHERE YEAR(e.hire_date)=2007 OR 
+          (e.job_id='IT_PROG' AND e.salary>5000) OR 
+          (e.manager_id IS NULL AND e.salary > 5000); 
+
+
+Problem 43
+Retrieve the minimum salary, maximum salary, average salary, and total sum of salaries. Provide appropriate aliases for the aggregations.
+
+SELECT MIN(e.salary) AS minimum_salary,
+       MAX(e.salary) AS maximum_salary,
+       AVG(e.salary) AS average_salary,
+       SUM(e.salary) AS total_salary
+FROM employees AS e;
+
+
+Problem 44
+For each job ID, compute the average employee salary with respect to the job ID. Provide an appropriate alias for the aggregation.
+
+SELECT e.job_id, AVG(e.salary) AS average_salary
+FROM employees AS e
+GROUP BY e.job_id;
+
+
+Problem 45
+For each job ID, compute the minimum and maximum salary with respect to the job ID. Provide appropriate aliases for the aggregations.
+
+SELECT e.job_id, 
+               MIN(e.salary) AS minimum_salary,
+               MAX(e.salary) AS maximum_salary
+FROM employees AS e
+GROUP BY job_id;
+
+
+Problem 46
+For each existing job ID and manager ID combination, compute the number of employees and the average salary for those employees. Provide appropriate aliases for the aggregations.
+
+SELECT e.job_id, e.manager_id, AVG(e.salary) AS average_salary, COUNT(e.salary) AS employee_count
+FROM employees AS e
+GROUP BY e.job_id,e.manager_id;
+
+
+Problem 47
+For each region ID, compute the number of countries assigned the region ID. Provide an appropriate alias for the aggregation.
+
+SELECT c.region_id, COUNT(c.country_name) AS number_of_countries
+FROM countries AS c
+GROUP BY c.region_id; 
+
+
+Problem 48
+For each manager ID, compute the number of employees assigned the manager ID. Provide an appropriate alias for the aggregation.
+
+SELECT e.manager_id, COUNT(e.employee_id) AS employee_count
+FROM employees AS e 
+GROUP BY e.manager_id;
+
+
+Problem 49
+For each manager ID, compute the maximum salary for employees assigned the manager ID. Provide an appropriate alias for the aggregation.
+
+SELECT e.manager_id, MAX(e.salary) AS maximum_salary_of_employee
+FROM employees AS e
+GROUP BY e.manager_id;
+
+
+Problem 50
+For each country ID and state/province combination, compute the number of department/warehouse locations. Provide an appropriate alias for the aggregation.
+
+SELECT l.country_id, l.state_province, COUNT(l.location_id) AS location_count
+FROM locations AS l
+GROUP BY l.country_id, l.state_province;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
