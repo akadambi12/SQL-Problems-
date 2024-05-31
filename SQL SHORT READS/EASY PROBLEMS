@@ -403,6 +403,69 @@ FROM locations AS l
 GROUP BY l.country_id, l.state_province;
 
 
+Problem 51
+For each job ID, compute the minimum and maximum salary with respect to the job ID. Return only job IDs with an range (MAX Salary – MIN Salary for each job ID) of salaries greater than or equal to $3,000. Provide appropriate aliases for the aggregations.
+
+SELECT e.job_id, MAX(e.salary) AS max_salary, MIN(e.salary) AS min_salary
+FROM employees AS e
+GROUP BY job_id
+HAVING (MAX(e.salary)- MIN(e.salary)) >= 3000 ;
+
+
+Problem 52
+For each existing job ID and manager ID combination, compute the number of employees and the average salary for those employees. Return only those job ID and manager ID combinations for which at least two employees are employed under the respective job ID and manager ID combination. Provide appropriate aliases for the aggregations.
+
+SELECT e.job_id, e.manager_id, COUNT(e.employee_id) AS employee_count, AVG(e.salary) AS average_salary
+FROM employees AS e
+GROUP BY e.job_id, e.manager_id
+HAVING COUNT(e.employee_id) >=2; 
+
+
+Problem 53
+Retrieve the department ID(s) and the sum of the employees’ salaries for each department ID for departments with a total salary of greater than $100,000. Provide an appropriate alias for the aggregation.
+
+SELECT e.department_id, SUM(e.salary) AS total_department_salary
+FROM employees AS e
+GROUP BY e.department_id
+HAVING SUM(e.salary) > 100000; 
+
+
+Problem 54
+Retrieve the department IDs and the number of employees where more than 5 employees are assigned/work in. Provide an appropriate alias for the aggregation.
+
+SELECT e.department_id, COUNT(e.employee_id) AS employee_count
+FROM employees AS e
+GROUP BY e.department_id
+HAVING COUNT(e.employee_id) > 5; 
+
+
+Problem 55
+Retrieve the employee ID(s) and number of jobs each employee has held for employees that have held more than 2 jobs. Provide an appropriate alias for the aggregation.
+
+SELECT e.employee_id, COUNT(e.job_id) AS job_count
+FROM employees AS e
+GROUP BY e.employee_id
+HAVING COUNT(e.job_id) > 2;
+
+
+Problem 56
+Retrieve employee IDs, job IDs, hire dates, and salaries for all employees. Sort/order the result set by hire date in ascending order and by salary in descending order.
+
+SELECT e.employee_id, e.job_id, e.hire_date, e.salary 
+FROM employees AS e
+ORDER BY e.hire_date ASC, e.salary DESC;
+
+
+Problem 57
+Retrieve country IDs, country names, and region IDs for all countries. Sort/order the result set by region ID in ascending order and by country name in ascending order.
+
+SELECT c.country_id, c.country_name, c.region_id 
+FROM countries AS c
+ORDER BY c.region_id ASC, c.country_name ASC;
+
+
+
+
 
 
 
