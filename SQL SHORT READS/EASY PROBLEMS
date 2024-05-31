@@ -464,6 +464,41 @@ FROM countries AS c
 ORDER BY c.region_id ASC, c.country_name ASC;
 
 
+Problem 58
+Retrieve the employee ID and hire date for each employee. Sort/order the result set by hire date in ascending order (i.e., oldest to newest).
+
+SELECT e.employee_id, e.hire_date
+FROM employees AS e
+ORDER BY e.hire_date ASC;
+
+
+Problem 59
+Retrieve the employee ID, job ID, and salary for each employee. Sort/order the result set by salary in descending order (i.e., largest salary to smallest salary).
+
+SELECT e.employee_id, e.job_id, e.salary 
+FROM employees AS e
+ORDER BY e.salary DESC;
+
+
+Problem 60
+Retrieve the manager ID, employee ID, and salary for each employee. Sort/order the result set by manager ID (ascending) and within each manager, sort employee salaries in descending order.
+
+SELECT e.manager_id, e.employee_id, e.salary
+FROM employees AS e
+ORDER BY e.manager_id ASC, e.salary DESC; 
+
+
+Problem 61
+For each country ID, return the number of departments/warehouses. Sort/order the result set by the number of departments/warehouses located in each country. Provide an appropriate alias for the aggregation.
+
+SELECT l.country_id, COUNT(l.location_id) AS warehouse_count
+FROM locations AS l
+GROUP BY l.country_id
+ORDER BY warehouse_count DESC;
+
+
+
+
 
 
 
