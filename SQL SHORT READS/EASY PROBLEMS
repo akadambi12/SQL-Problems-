@@ -356,9 +356,7 @@ GROUP BY e.job_id;
 Problem 45
 For each job ID, compute the minimum and maximum salary with respect to the job ID. Provide appropriate aliases for the aggregations.
 
-SELECT e.job_id, 
-               MIN(e.salary) AS minimum_salary,
-               MAX(e.salary) AS maximum_salary
+SELECT e.job_id, MIN(e.salary) AS minimum_salary, MAX(e.salary) AS maximum_salary
 FROM employees AS e
 GROUP BY job_id;
 
