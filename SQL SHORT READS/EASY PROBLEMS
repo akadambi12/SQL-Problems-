@@ -495,6 +495,60 @@ GROUP BY l.country_id
 ORDER BY warehouse_count DESC;
 
 
+Problem 62
+Write a query that returns a result set containing, for each product, the product ID, product name, product description, list price, and minimum price.
+In addition, include a derived column containing the difference between the listing price and the minimum price. Alias this column as “amount_above_min.”
+
+SELECT p.product_id, p.product_name, p.product_description, p.list_price, p.min_price, p.list_price - p.min_price AS amount_above_min
+FROM product_information AS p;
+
+
+Problem 63
+Write a query that returns a result set containing, for each customer, the customer ID, customer first name, 
+customer last name, and credit limit. Only include customers with a last name starting with ‘A’ that also have a credit limit less than or equal to 1200. Sort the result set by credit limit, ascending.
+
+SELECT c.customer_id, c.cust_first_name, c.cust_last_name, c.credit_limit
+FROM customers AS c
+WHERE c.cust_last_name LIKE 'A%' AND c.credit_limit <= 1200
+ORDER BY c.credit_limit ASC;
+
+
+Problem 64
+Write a query that returns a result set containing, for each order, the order ID, order date, and order total. Only include orders placed in year 2008 and later 
+with an order total greater than $50,000 or for those orders placed in year 2007 with an order total greater than $25,000. Sort the result set by order date (ascending) and by order total (descending).
+
+SELECT o.order_id, o.order_date, o.order_total
+FROM orders AS o
+WHERE (YEAR(o.order_date)=2007 AND o.order_total>25000) OR (YEAR(o.oder_date)>=2008 AND o.order_total>50000)
+ORDER BY o.order_date ASC, o.order_total DESC;
+
+Problem 65
+Write a query that returns a result set containing the number of customers for each gender and credit limit combination.
+Gender and credit limit data should be included in the result set. Sort the result set by credit limit (ascending) and gender (ascending).
+
+SELECT c.gender, COUNT(c.gender) AS gender_count, c.credit_limit
+FROM customers AS c
+GROUP BY c.gender, c.credit_limit
+ORDER BY c.credit_limit ASC, c.gender ASC;
+
+Problem 66
+Write a query that returns a result set containing the number of customers for each natural language support territory (nls_territory), gender, and credit limit combination. NLS territory, gender, and credit limit data should be included in the result set. Only include those combinations for which a single customer is aligned/belongs. Sort the result set by NLS territory (ascending), credit limit (ascending), and gender (ascending).
+
+SELECT  c.gender, c.credit_limit, COUNT(*) AS cust_count
+FROM customers AS c
+GROUP BY c.nls_territory, c.gender, c.credit_limit
+HAVING COUNT(*) = 1
+ORDER BY c.nls_territory ASC, c.credit_limit ASC, c.gender ASC;
+
+*** NOTE: COUNT(*) AS cust_count: The function COUNT(*) counts the number of customers in each group. The alias cust_count makes it clear what this column represents.
+          HAVING COUNT(*) = 1: This clause is used to filter the grouped results to include only those groups where exactly one customer is present, which aligns 
+          with the requirement to include only combinations with a single customer.
+
+
+
+
+
+
 
 
 
