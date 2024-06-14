@@ -545,6 +545,33 @@ ORDER BY c.nls_territory ASC, c.credit_limit ASC, c.gender ASC;
           with the requirement to include only combinations with a single customer.
 
 
+Problem 67
+For each order, retrieve the order ID, order date, customer ID, order total, and sales rep ID. Sort the result set by customer ID (ascending) and order date (ascending).
+
+SELECT o.oder_total, o.oder_ID, o.order_date, o.customer_ID, o.sales_rep_id
+FROM orders AS o
+ORDER BY o.customer_id ASC, o.order_date ASC;
+
+
+Problem 68
+Retrieve only those orders with an order total greater than $100,000. Include the order ID, order date, customer ID, order total, and sales rep ID for each order. 
+Sort the result set by customer ID (ascending) and order date (ascending).
+
+SELECT o.order_id, o.order_date, o. customer_id, o.order_total, o.sales_rep_id
+FROM orders AS o
+WHERE o.order_total > 100000
+ORDER BY o.cusotmer_id ASC. o.order_date ASC;
+
+
+Problem 69
+For each order, retrieve the order ID, line-item ID, product ID, unit price, and quantity of the first line item.
+
+SELECT oi.oder_id, oi.line_item_id, oi. product_id, oi.unit_price, oi.quantity
+FROM order_items AS oi
+WHERE oi.line_item_id=1;
+
+
+
 
 
 
