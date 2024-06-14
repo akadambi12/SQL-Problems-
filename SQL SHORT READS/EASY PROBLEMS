@@ -33,7 +33,8 @@ SELECT j.job_id AS job_code, j.job_title AS title, j.min_salary AS minimum_salar
 FROM jobs AS j;
 
 
-Problem 6: Retrieve the job ID, job title, maximum salary, minimum salary, and salary range for each job. Salary range is defined as the difference between the maximum salary and minimum salary. Alias the difference as “salary_range.”
+Problem 6: Retrieve the job ID, job title, maximum salary, minimum salary, and salary range for each job.
+Salary range is defined as the difference between the maximum salary and minimum salary. Alias the difference as “salary_range.”
 
 SELECT j.job_id , j.job_title , j.min_salary, j.max_salary, j.max_salary-j.min_salary AS salary_range
 FROM jobs AS j;
@@ -325,7 +326,8 @@ WHERE YEAR(e.hire_date)=2007 OR (e.job_id='IT_PROG' AND e.salary>5000);
 
 
 Problem 42
-Retrieve the employee ID, hire date, job ID, manager ID, and salary for employees that were hired in year 2007 or were hired on as programmers with a salary greater than 5000 or employees without a manager ID assigned and with a salary greater than 5000.
+Retrieve the employee ID, hire date, job ID, manager ID, and salary for employees that were hired in year 2007 or were hired on as programmers with a salary 
+greater than 5000 or employees without a manager ID assigned and with a salary greater than 5000.
 
 
 SELECT e.employee_id, e.hire_date, e.job_id, e.salary 
@@ -402,7 +404,8 @@ GROUP BY l.country_id, l.state_province;
 
 
 Problem 51
-For each job ID, compute the minimum and maximum salary with respect to the job ID. Return only job IDs with an range (MAX Salary – MIN Salary for each job ID) of salaries greater than or equal to $3,000. Provide appropriate aliases for the aggregations.
+For each job ID, compute the minimum and maximum salary with respect to the job ID. Return only job IDs with an range (MAX Salary – MIN Salary for each job ID) of 
+salaries greater than or equal to $3,000. Provide appropriate aliases for the aggregations.
 
 SELECT e.job_id, MAX(e.salary) AS max_salary, MIN(e.salary) AS min_salary
 FROM employees AS e
@@ -411,7 +414,8 @@ HAVING (MAX(e.salary)- MIN(e.salary)) >= 3000 ;
 
 
 Problem 52
-For each existing job ID and manager ID combination, compute the number of employees and the average salary for those employees. Return only those job ID and manager ID combinations for which at least two employees are employed under the respective job ID and manager ID combination. Provide appropriate aliases for the aggregations.
+For each existing job ID and manager ID combination, compute the number of employees and the average salary for those employees. Return only those job ID and
+manager ID combinations for which at least two employees are employed under the respective job ID and manager ID combination. Provide appropriate aliases for the aggregations.
 
 SELECT e.job_id, e.manager_id, COUNT(e.employee_id) AS employee_count, AVG(e.salary) AS average_salary
 FROM employees AS e
@@ -420,7 +424,8 @@ HAVING COUNT(e.employee_id) >=2;
 
 
 Problem 53
-Retrieve the department ID(s) and the sum of the employees’ salaries for each department ID for departments with a total salary of greater than $100,000. Provide an appropriate alias for the aggregation.
+Retrieve the department ID(s) and the sum of the employees’ salaries for each department ID for departments with a total salary of greater than $100,000. 
+Provide an appropriate alias for the aggregation.
 
 SELECT e.department_id, SUM(e.salary) AS total_department_salary
 FROM employees AS e
@@ -487,7 +492,8 @@ ORDER BY e.manager_id ASC, e.salary DESC;
 
 
 Problem 61
-For each country ID, return the number of departments/warehouses. Sort/order the result set by the number of departments/warehouses located in each country. Provide an appropriate alias for the aggregation.
+For each country ID, return the number of departments/warehouses. Sort/order the result set by the number of departments/warehouses located in each country.
+Provide an appropriate alias for the aggregation.
 
 SELECT l.country_id, COUNT(l.location_id) AS warehouse_count
 FROM locations AS l
@@ -505,7 +511,8 @@ FROM product_information AS p;
 
 Problem 63
 Write a query that returns a result set containing, for each customer, the customer ID, customer first name, 
-customer last name, and credit limit. Only include customers with a last name starting with ‘A’ that also have a credit limit less than or equal to 1200. Sort the result set by credit limit, ascending.
+customer last name, and credit limit. Only include customers with a last name starting with ‘A’ that also have a credit limit less than or equal to 1200. 
+Sort the result set by credit limit, ascending.
 
 SELECT c.customer_id, c.cust_first_name, c.cust_last_name, c.credit_limit
 FROM customers AS c
@@ -532,7 +539,9 @@ GROUP BY c.gender, c.credit_limit
 ORDER BY c.credit_limit ASC, c.gender ASC;
 
 Problem 66
-Write a query that returns a result set containing the number of customers for each natural language support territory (nls_territory), gender, and credit limit combination. NLS territory, gender, and credit limit data should be included in the result set. Only include those combinations for which a single customer is aligned/belongs. Sort the result set by NLS territory (ascending), credit limit (ascending), and gender (ascending).
+Write a query that returns a result set containing the number of customers for each natural language support territory (nls_territory), gender, and credit limit combination.
+NLS territory, gender, and credit limit data should be included in the result set. Only include those combinations for which a single customer is aligned/belongs. 
+Sort the result set by NLS territory (ascending), credit limit (ascending), and gender (ascending).
 
 SELECT  c.gender, c.credit_limit, COUNT(*) AS cust_count
 FROM customers AS c
@@ -569,6 +578,364 @@ For each order, retrieve the order ID, line-item ID, product ID, unit price, and
 SELECT oi.oder_id, oi.line_item_id, oi. product_id, oi.unit_price, oi.quantity
 FROM order_items AS oi
 WHERE oi.line_item_id=1;
+
+
+Problem 70
+For each order, retrieve the order ID, order date, and order total. Only include those orders with an order total between $75,000 and $100,000, inclusive. 
+Sort the result set by order total, descending.
+
+SELECT o.order_id, o.order_date, o.order_total
+FROM orders AS o
+WHERE o.order_total BETWEEN 75000 AND 100000
+ORDER BY o.order_total DESC;
+
+
+
+Problem 71
+Retrieve all customers with a national language support territory (nls_territory) of America, India, or China. Include the customer ID, 
+customer first name, customer last name, and NLS territory for each customer. Sort the result set by NLS territory (ascending) and customer ID (ascending).
+
+SELECT c.customer_id, c.cust_first_name, c.cust_last_name, c.nls_territory
+FROM customers AS c
+WHERE c.nls_territory IN ('America', 'India', 'China')
+ORDER BY c.nls_territory ASC, c.customer_id ASC;
+
+
+Problem 72
+Retrieve product information for all products with product names starting with ‘Inkjet.’ Include the product ID, product name, and product description for each product.
+
+SELECT pi.product_id, pi.product_name, pi.product_description
+FROM product_information AS pi
+WHERE pi.product_name LIKE 'Inkjet%';
+
+
+Problem 73
+Retrieve the product ID, supplier ID, and catalog URL for products with a catalog URL containing the string, 102094.
+
+SELECT pi.product_id, pi.supplier_id, pi.catelog_url
+FROM product_information AS pi
+WHERE pi.catalog_url LIKE '%102094%';
+
+
+Problem 74
+Retrieve the order ID, order date, order total, customer ID, and sales rep ID. Only include online orders in your result set. Assume all orders without a sales rep ID are online orders.
+
+SELECT o.order_id, o.order_date, o.order_total, o.customer_id, o.sales_rep_id
+FROM orders AS o
+WHERE o.order_mode = 'online'; 
+
+Aletrnate Answer: 
+SELECT o.order_id, o.order_date, o.order_total, o.customer_id, o.sales_rep_id
+FROM orders AS o
+WHERE o.sales_rep_id IS NULL;
+
+
+
+Problem 75
+Retrieve online orders. Only include online orders placed in year 2007 or online orders with an order total greater than or equal to $100,000. 
+Include the order ID, order date, order total, and sales rep ID for each online order. Assume all orders without a sales rep ID are online orders. Sort the result set by order date, ascending.
+
+SELECT o.order_id, o.order_date, o.order_total, o.sales_rep_id
+FROM orders AS o
+WHERE o.order_mode = 'online' AND ((YEAR(o.order_date)=2007) OR o.order_total>=100000);
+
+
+
+Problem 76
+Retrieve product information for products that have a minimum price greater than or equal to $1,000 or less than or equal to $10.
+In addition, only include products with a category ID of 19. Include the product ID, product name, category ID, and minimum price for each product. Sort the result set by minimum price, descending.
+
+SELECT pi.product_id, pi.product_name, pi.category_id, pi.min_price 
+FROM product_information AS pi
+WHERE (pi.min_price =1000 OR pi.min_price <=10) AND pi.category_id =19 
+ORDER BY pi.min_price DESC;
+
+
+
+Problem 77
+Compute/retrieve the minimum order total, maximum order total, sum of all order totals, the number of orders placed, and the average of all order totals. 
+Provide meaningful aliases/names to the derived columns.
+
+SELECT MIN(o.order_total) AS min_order_total, MAX(o.order_total) AS Max_order_total, SUM(o.order_total) AS sum_order_total, COUNT(o.order_id) AS order_count, AVG(o.order_total) AS average_order_total 
+FROM orders AS o;
+
+
+Problem 78
+For each customer, compute/retrieve the minimum order total, maximum order total, sum of all order totals, the number of orders placed, and the average of all order totals. 
+Provide meaningful aliases/names to the derived columns. The customer ID should be the first column in your result set. Sort the result set by the sum of order totals, descending.
+
+SELECT o.customer_id, MIN(o.order_total) AS min_order_totla, MAX(o.order_total) AS max_order_total, SUM(o.order_total) AS sum_order_total, COUNT(o.order_id), AVG(o.order_id) AS avg_order_toal
+GROUP BY o.customer_id
+ORDER BY sum_order_total DESC:
+
+
+
+Problem 79
+For each product ID, compute/retrieve the number orders placed for that item. 
+The product ID should be the first column in your result set. Provide a meaningful alias/name to the derived column. Sort the result set by the number of times a product was ordered, descending.
+
+SELECT pi.product_id, COUNT(pi.product_id) AS product_count
+FROM product_information AS pi
+ORDER BY product_count DESC;
+
+
+Problem 80
+For each existing account manager ID and credit limit combination, compute/retrieve the number of customers aligned to the manager ID and credit limit combination.
+Account manager ID and credit limit should be included in your result set. Provide a meaningful alias/name to the derived column. 
+Sort the result set by account manager ID (ascending) and by credit limit (descending).
+
+
+SELECT c.manager_id, c.credit_limit, COUNT(c.customer_id) AS customer_count
+FROM customers AS c
+GROUP BY c.manager_id, c.credit_limit
+ORDER BY c.manager_id ASC, c.credit_limit DESC;
+
+
+
+Problem 81
+Retrieve the number of products containing product information for each product category ID. Only include those product category IDs with more than 25 products aligned
+to the product category ID. The product category ID should be the first column in your result set. Provide a meaningful alias/name to the derived column. 
+Sort the result set by the number of products in each product category ID, descending.
+
+SELECT pi.category_id, COUNT(pi.product_id) AS product_count 
+FROM product_information AS pi
+HAVING  COUNT(pi.product_id)>25
+GROUP BY pi.category_id 
+ORDER BY product_count DESC;
+
+
+Problem 82
+For each customer that has placed an order, compute/retrieve the date the customer made their first order and the sum of all order totals.
+Only include customers that made their first order before year 2007 and have a sum of all order totals greater than $150,000. 
+The customer ID should be the first column in your result set. Provide meaningful aliases/names to the derived columns. Sort the result set by the first order’s order date.
+
+SELECT o.customer_id, MIN(o.order_date) AS first_order, SUM(o.order_total) AS order_sum
+FROM orders AS o
+HAVING order_sum>150000 AND MIN(o.order_date) < '01-JAN-2007'
+GROUP BY o.customer_id
+ORDER BY o.order_date ASC;
+
+
+Problem 83
+Retrieve the daily product category sales for April 2023. In the output, include the report date, product category, and total sales. Sort the result set in ascending order by report date and product category.
+
+SELECT na.report_date, na.product_category, na.total_sales
+FROM north_america_sales AS na
+WHERE na.report_date BETWEEN '01-APR-2023' AND '30-APR-2023'
+SORT BY na.report_date, na.product_category;
+
+
+
+Problem 84
+Building onto your solution from problem 83, retrieve only those daily sales for the Software product category. Remove the sorting based on product category.
+
+SELECT na.report_date, na.product_category, na.total_sales
+FROM north_america_sales AS na
+WHERE (na.report_date BETWEEN '01-APR-2023' AND '30-APR-2023') AND na.product_category='software';
+
+
+Problem 85
+Compute the total sales across all product categories for each day occurring in the months of July, August, and September of 2023. 
+Alias the computed sale amount column as ‘daily_total_sale’. In the output, include the report date and daily total sales. Sort the result set in ascending order by report date.
+
+SELECT na.report_date,SUM(na.total_sale) AS sum_total_sales
+FROM north_america_sales
+WHERE na.report_date BETWEEN '01-JUL-2023' AND '30-SEP-2023' 
+GROUP BY na.report_date
+SORT BY na.report_date ASC;
+
+Problem 86
+Building onto your previous solution from problem 85, only include those days where the daily total sales amount is greater than 1,000,000. Sort the result set in ascending order by report date.
+
+SELECT na.report_date,SUM(na.total_sale) AS sum_total_sales
+FROM north_america_sales
+WHERE (na.report_date BETWEEN '01-JUL-2023' AND '30-SEP-2023') 
+HAVING  sum_total_sales > 1000000
+GROUP BY na.report_date
+SORT BY na.report_date ASC;
+
+Problem 87
+For each member type, compute the total number of members. Alias the total number of members of each member type as “member_count.” In the output, include the member type ID and member count. Sort the result set in descending order by member_count.
+
+SELECT m.member_id, COUNT(m.member_id) AS member_count 
+FROM member AS m
+GROUP BY m.member_type_id
+ORDER BY member_count DESC;
+
+
+Problem 88
+For each employee, compute the total number of members enrolled. Alias the total number of members of each member type as “enrollment_count.” In the output, include the employee ID and enrollment count. Sort the result set in descending order by enrollment_count.
+
+SELECT m/employee_id, m.COUNT(member_id) AS enrollment_count
+FROM members AS m
+GROUP BY m.employee_id
+ORDER BY enrollment_count DESC:
+
+
+Problem 89
+Compute the average, minimum, maximum, and range (i.e., maximum – minimum) of using all the prices of all products. Provide meaningful aliases/names to the derived columns.
+
+SELECT  AVG(p.price) AS Average_price, MIN(p.price) AS minimum_price, MAX(p.price) AS maximum_price,MAX(p.price) - MIN(p.price) AS price_range
+FROM products AS p;
+
+
+Problem 90
+Write a query that returns a result set containing the product ID, description, and price for those products with a description containing the sequence of characters, “Chocolate.”
+
+SELECT p.product_id, p.description, p.price
+FROM products AS p
+WHERE p.description LIKE '%Chocolate%';
+
+
+Problem 91
+Compute the number of members enrolled each day based on the member enrollment date values. Alias the number of members enrolled as “enrollment_count.” In the output, include the enrollment
+date and enrollment count. Sort the result set in ascending order by enrollment_date.
+
+SELECT member.enrollment_date, COUNT(member.member_id) AS enrollment_count
+FROM member
+GROUP BY member.enrollment_date
+ORDER BY member.enrollment_date;
+
+
+
+Problem 92
+Building onto your previous solution from problem 91, only include those days where the number of members enrolled is at least 3.
+
+SELECT member.enrollment_date, COUNT(member.member_id) AS enrollment_count
+FROM member
+GROUP BY member.enrollment_date
+HAVING COUNT(member.member_id) >= 3
+ORDER BY member.enrollment_date;
+
+
+Problem 93
+Retrieve member details for those members enrolled by the employee with an ID value of 1 or with an enrollment date occurring within the month
+of March 2024. In the output, include the member ID, member type ID, enrollment date, email address, and employee ID.
+
+SELECT member.member_id, member.member_type_id, member.enrollment_date, member.email_address, member.employee_id
+FROM member
+WHERE member.employee_id = 1 OR (enrollment_date >= '01-MAR-24' AND enrollment_date < '01-APR-24');
+
+
+
+Problem 94
+Compute the number of members associated with each member type. Alias the number of members as “member_count.” 
+In the output, include the member type ID and member count. Sort the result set in ascending order by member type ID.
+
+SELECT member.member_type_id, COUNT(member.member_id) AS member_count
+FROM member
+GROUP BY member.member_type_id
+ORDER BY member_type_id;
+
+
+
+Problem 95
+Write a query that returns a result set containing the employee ID, last name, first name, 
+hire date, job ID, and salary for those employees hired prior to the ice cream shop’s opening date (i.e., January 1, 2024).
+
+SELECT employee.employee_id, employee.last_name, employee.first_name, employee.hire_date, employee.job_id, employee.salary
+FROM employee
+WHERE employee.hire_date < '01-JAN-24';
+
+Problem 96
+Adjust your solution to problem 96 to compute the number of employees hired prior to the ice cream shop’s opening date (i.e., January 1, 2024). Alias the number of employees hired as “employee_count.”
+
+SELECT COUNT(employee.employee_id) AS employee_count
+FROM employee
+WHERE employee.hire_date < '01-JAN-24';
+
+
+Problem 97
+Building onto your solution to the previous problem, break out the total number of employees hired by job ID value. There should be one row per job ID value and the corresponding employee count.
+
+SELECT employee.job_id, COUNT(employee.employee_id) AS employee_count
+FROM employee
+WHERE employee.hire_date < '01-JAN-24'
+GROUP BY employee.job_id;
+
+
+Problem 98
+Compute the average salary for each job. Only include those job ID values where more than one employee holds the corresponding job. 
+Alias the average salary column as “average_salary.” In the output, include the job ID corresponding average salary.
+
+SELECT employee.job_id, AVG(employee.salary) AS average_salary
+FROM employee
+GROUP BY employee.job_id
+HAVING COUNT(employee.employee_id) > 1;
+
+
+Problem 99
+Compute the ice cream shop’s daily sales. Alias the daily sales column as “daily_sales.” In the output, include the purchase date and daily sales. 
+Sort the result set in ascending order by purchase date.
+
+SELECT purchase_date, SUM(purchase_total) AS daily_sales
+FROM purchase
+GROUP BY purchase_date
+ORDER BY purchase_date;
+
+Problem 100
+Retrieve the purchase details for purchases where the total purchase value exceeds $10, and the purchase date is in January 2024. In the output, 
+include the purchase ID, member ID, purchase date, employee ID, and purchase total. Sort the result set in ascending order by purchase date.
+
+SELECT p.purchase.purchase_id, p.purchase.member_id,  p.purchase.purchase_date, p.purchase.employee_id, p.purchase.purchase_total
+FROM purchase AS p
+WHERE p.purchase_total >= 10
+    AND p.purchase_date >= '01-JAN-24'
+    AND p.purchase_date < '01-FEB-24'
+ORDER BY p purchase_date;
+
+
+
+Problem 101
+For each member, compute the total amount spent. Alias this computed amount as “total_sales.” In the output, include the member ID and total sales.
+Sort the result set in descending order by total sales.
+
+SELECT purchase.member_id, SUM(purchase.purchase_total) AS total_sales
+FROM purchase
+GROUP BY purchase.member_id
+ORDER BY SUM(purchase.purchase_total) DESC;
+
+
+Problem 102
+Building onto your solution to the previous problem, only include those members with a total sales value greater than or equal to $50 and more than three purchases.
+
+SELECT purchase.member_id, SUM(purchase.purchase_total) AS total_sales
+FROM purchase
+GROUP BY purchase.member_id
+HAVING SUM(purchase.purchase_total) >= 50AND COUNT(purchase.purchase_id) > 3
+ORDER BY SUM(purchase.purchase_total) DESC;
+
+
+Problem 103
+Compute the distinct number of times each product has been purchased. Alias this computed value as “purchase_count.” In the output, include the product 
+ID and purchase count. Sort the result set in descending order by purchase count.
+
+SELECT purchase_item.product_id, COUNT(purchase_item.purchase_id) AS purchase_count
+FROM purchase_item
+GROUP BY purchase_item.product_id
+ORDER BY COUNT(purchase_item.purchase_id) DESC;
+
+
+Problem 104
+For each purchase, compute the total number of items purchased based on quantity. Alias this computed value as “item_count.”
+In the output, include the purchase ID and item count. Sort the result set in descending order by item count.
+
+SELECT purchase_item.purchase_id, SUM(purchase_item.quantity) AS total_quantity
+FROM purchase_item
+GROUP BY purchase_item.purchase_id
+ORDER BY SUM(purchase_item.quantity) DESC;
+
+
+Problem 105
+Retrieve the purchase ID values for those purchases containing product ID values 1, 4, or 8. In the output, include the purchase ID.
+
+SELECT DISTINCT purchase_item.purchase_id
+FROM purchase_item
+WHERE purchase_item.product_id IN (1, 4, 8);
+
+
+
+
 
 
 
