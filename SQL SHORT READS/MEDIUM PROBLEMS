@@ -56,5 +56,32 @@ Problem 4
 Retrieve the customer ID, customer first name, customer last name, order ID, order date, and order total for all orders. 
 Only include customers that have made an order. Sort the result set by customer ID (ascending) and order date (ascending).
 
+SELECT 
+    c.customer_id, 
+    c.cust_first_name, 
+    c.cust_last_name, 
+    o.order_id, 
+    o.order_date, 
+    o.order_total
+FROM 
+    oe.customers AS c
+INNER JOIN 
+    oe.orders AS o 
+ON 
+    c.customer_id = o.customer_id
+ORDER BY 
+    c.customer_id ASC, 
+    o.order_date ASC;
 
 
+
+Problem 5
+Retrieve the customer ID, customer first name, customer last name for customers that have not made an order.
+Sort the result set by customer ID, ascending. Use a join in conjunction with a WHERE clause to achieve this. Do not use a subquery.
+
+SELECT c.customer_id, c.cust_first_name, c.cust_last_name
+FROM oe.customers AS c
+LEFT JOIN oe.orders AS o
+ON oe.customers.customer_id=oe.order.customer_id
+WHERE o.order_id IS NULL
+ORDER BY c.customer_id ASC;
