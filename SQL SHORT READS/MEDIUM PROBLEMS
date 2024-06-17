@@ -1,1 +1,60 @@
+Problem 1
+For each department/warehouse location, retrieve the location ID, street address, postal code, city, state/province, and country name. 
+Ensure your result set represents all locations even if the country ID for the location does not match an existing country ID in the countries table.
+
+SELECT hr.locations.location_id, hr.locations.street_address, hr.locations.postal_code, hr.locations.city, hr.loactions.state/province, hr.countries.country_name
+FROM hr.locations
+LEFT JOIN hr.locations 
+ON hr.locations.country_id = hr.countries.country_id;
+
+
+
+Problem 2
+For each country ID, retrieve the location IDs, street addresses, postal codes, cities, states/provinces, and country names for department(s)/warehouse(s) that are tied to the respective country ID. 
+Include country name data even if a department/warehouse is not currently located in the country.
+
+SELECT  SELECT hr.locations.location_id, hr.locations.street_address, hr.locations.postal_code, hr.locations.city, hr.loactions.state/province, hr.countries.country_name
+FROM hr.locations
+LEFT JOIN hr.countries
+ON hr.countries.country_id = hr.locations.country_id;
+
+
+Problem 3
+For each department, retrieve the department ID, department name, first name and last name of the manager heading the department, and the manager’s email address. In addition, include the street address, city, state/province, 
+and country name for which the department is located. Sort/order the result set by department ID, ascending.
+
+SELECT 
+    d.department_id, 
+    d.department_name, 
+    e.first_name, 
+    e.last_name, 
+    e.email, 
+    l.street_address, 
+    l.city, 
+    l.state_province, 
+    c.country_name
+FROM 
+    hr.departments AS d
+INNER JOIN 
+    hr.employees AS e
+ON 
+    d.manager_id = e.employee_id
+INNER JOIN 
+    hr.locations AS l
+ON 
+    d.location_id = l.location_id
+INNER JOIN 
+    hr.countries AS c
+ON 
+    l.country_id = c.country_id
+ORDER BY 
+    d.department_id ASC;
+
+
+
+Problem 4
+Retrieve the customer ID, customer first name, customer last name, order ID, order date, and order total for all orders. 
+Only include customers that have made an order. Sort the result set by customer ID (ascending) and order date (ascending).
+
+
 
