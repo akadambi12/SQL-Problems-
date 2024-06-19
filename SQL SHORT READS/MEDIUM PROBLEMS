@@ -177,3 +177,26 @@ SELECT o.customer_id, EXTRACT(YEAR FROM oe.orders.order_date) AS order_year, COU
 FROM oe.orders AS o
 GROUP BY o.customer_id,EXTRACT(YEAR FROM oe.orders.order_date)
 ORDER BY o.customer_id, order_year;
+
+
+Problem 10
+For each category ID, retrieve the category ID, parent category ID, category name, category description,
+parent category name, and parent category description. Include all category IDs even if a parent category doesn’t exist. 
+Each row should consist of child category and parent category (i.e., 1 level above the child) data. Alias the parent category name as 
+“parent_category_name” and the parent category description as “parent_category_description.” Sort the result set by the child category ID, 
+ascending.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
