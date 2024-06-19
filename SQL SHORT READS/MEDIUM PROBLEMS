@@ -154,3 +154,26 @@ For each customer ID, retrieve the product IDs and the total quantity ordered by
 For example, if customer 123 ordered 5 of product ABC on one occasion and 8 of product ABC on another occasion, then the record should as 123 for the customer ID,
 ABC for the product ID, and 13 for the total quantity ordered for the item across all the customer’s orders.
 Alias the summation as “total_ordered.” Sort the result set by customer ID (ascending) and product ID (ascending).
+
+
+SELECT o.customer_id, 
+       i.product_id, 
+      SUM(i.quantity) AS total_ordered
+FROM oe.orders AS o 
+INNER JOIN oe.order_items AS i
+ON o.oder_id=i.order_id 
+GROUP BY o.customer_id, i.product_id
+ORDER BY o.customer_id,i.product_id;
+
+
+
+Problem 9
+For each customer ID, compute/retrieve the total number of orders placed by year. 
+To extract the year from the order date, use EXTRACT(YEAR FROM oe.orders.order_date).
+Alias this derived column as “order_year.” Provide the alias of “order_count” to the number of orders placed by the customer for each year. 
+Sort the result set by customer ID (ascending) and order year (ascending).
+
+SELECT o.customer_id, EXTRACT(YEAR FROM oe.orders.order_date) AS order_year, COUNT(o.order_id) AS order_count
+FROM oe.orders AS o
+GROUP BY o.customer_id,EXTRACT(YEAR FROM oe.orders.order_date)
+ORDER BY o.customer_id, order_year;
