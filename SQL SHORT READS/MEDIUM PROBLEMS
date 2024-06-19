@@ -4,7 +4,7 @@ Ensure your result set represents all locations even if the country ID for the l
 
 SELECT hr.locations.location_id, hr.locations.street_address, hr.locations.postal_code, hr.locations.city, hr.loactions.state/province, hr.countries.country_name
 FROM hr.locations
-LEFT JOIN hr.locations 
+LEFT JOIN hr.countries
 ON hr.locations.country_id = hr.countries.country_id;
 
 
@@ -15,7 +15,7 @@ Include country name data even if a department/warehouse is not currently locate
 
 SELECT  SELECT hr.locations.location_id, hr.locations.street_address, hr.locations.postal_code, hr.locations.city, hr.loactions.state/province, hr.countries.country_name
 FROM hr.locations
-LEFT JOIN hr.countries
+LEFT JOIN hr.locations
 ON hr.countries.country_id = hr.locations.country_id;
 
 
