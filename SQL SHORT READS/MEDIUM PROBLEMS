@@ -85,3 +85,72 @@ LEFT JOIN oe.orders AS o
 ON oe.customers.customer_id=oe.order.customer_id
 WHERE o.order_id IS NULL
 ORDER BY c.customer_id ASC;
+
+
+Problem 6
+For each order, retrieve the order ID, order date, and line-item IDs associated with the order ID. In addition, for each of the line-items associated with an order ID, include the unit price, quantity, and the sale amount (unit price * quantity) for the line item. Provide the derived sale amount column with an alias of “sale_amount.”
+Sort the result set by order date (ascending), order ID (ascending), and line-item ID (ascending).
+
+
+SELECT 
+    o.order_id, 
+    o.order_date, 
+    i.line_item_id, 
+    i.unit_price, 
+    i.quantity, 
+    i.unit_price * i.quantity AS sale_amount
+FROM 
+    oe.orders AS o
+INNER JOIN 
+    oe.order_items AS i
+ON 
+    o.order_id = i.order_id
+ORDER BY 
+    o.order_date ASC, 
+    o.order_id ASC, 
+    i.line_item_id ASC;
+
+
+Problem 7
+Build onto your solution for problem 6. For each order, retrieve the order ID, order date, and line-item IDs associated with the order ID. In addition,
+for each of the line-items associated with an order ID, include the product ID, product name, product description, unit price, quantity, and the sale amount (unit price * quantity) for the line item. 
+Only include those records with a category ID of 19.
+Provide the derived sale amount column with an alias of “sale_amount.” Sort the result set by order date (ascending), order ID (ascending), and line-item ID (ascending).
+
+SELECT 
+    o.order_id, 
+    o.order_date, 
+    i.line_item_id, 
+    i.product_id,
+    p.product_name,
+    p.product_description,
+    i.unit_price, 
+    i.quantity, 
+    i.unit_price * i.quantity AS sale_amount
+FROM 
+    oe.orders AS o
+INNER JOIN 
+    oe.order_items AS i
+ON 
+    o.order_id = i.order_id
+INNER JOIN 
+    oe.products AS p
+ON 
+    i.product_id = p.product_id
+INNER JOIN 
+    oe.categories AS c
+ON 
+    p.category_id = c.category_id
+WHERE 
+    c.category_id = 19
+ORDER BY 
+    o.order_date ASC, 
+    o.order_id ASC, 
+    i.line_item_id ASC;
+
+
+Problem 8
+For each customer ID, retrieve the product IDs and the total quantity ordered by the customer. 
+For example, if customer 123 ordered 5 of product ABC on one occasion and 8 of product ABC on another occasion, then the record should as 123 for the customer ID,
+ABC for the product ID, and 13 for the total quantity ordered for the item across all the customer’s orders.
+Alias the summation as “total_ordered.” Sort the result set by customer ID (ascending) and product ID (ascending).
