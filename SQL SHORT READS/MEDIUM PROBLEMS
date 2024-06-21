@@ -290,6 +290,21 @@ ORDER BY o.order_date DESC;
 
 
 
+Problem 15
+Write a query that returns a result set containing the order ID, order date, customer ID, line-item ID, product ID,
+quantity, and unit price for all line-items with a quantity greater than 200 or those line-items with a unit price greater than $2,000. 
+If an order has 5 line-items and only 2 of the line-items meet the criteria, then only 2 rows should be returned for the order
+(i.e., 1 for each line-item). Sort the result set by order date, ascending.
+
+SELECT o.oder_id, o.order_date, o.customer_id, i.line_item_id, i.product_id, i.unit_price, i.quantity
+FROM oe.orders AS o
+INNER JOIN oe.oreder_items AS i
+ON o.order_id = i.order_id 
+WHERE i.quantity>200
+OR i.unit_price >2000
+SORT BY o.order_date ASC; 
+
+
 
 
 
