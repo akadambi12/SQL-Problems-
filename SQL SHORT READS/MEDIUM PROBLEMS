@@ -198,6 +198,7 @@ ON c1.parent_category_id = c2.category_id
 ORDER BY c1.child_category_id ASC;
 
 
+
 Problem 11
 For customer ID 105, retrieve the customer ID, customer first name, customer last name, order ID, line-item ID, product ID,
 product name, product description, unit price, and quantity for orders containing a line-item with a product name starting with “RAM.”
@@ -251,6 +252,22 @@ FROM
     oe.product_information
         ON oe.order_items.product_id = oe.product_information.product_id
         AND oe.product_information.product_name LIKE 'RAM%';
+
+
+
+Problem 12
+For each customer, compute/retrieve the average order total for the customer’s orders. Only include customers that have placed at least 1 order. Customer ID should be the first column in your output.
+Alias the average order total as “avg_order_total.” Sort the result set by average order total, descending.
+
+SELECT o.customer_id, AVG(o.order_total) AS avg_order_total
+FROM oe.orders AS o
+GROUP BY o.customer_id
+HAVING COUNT(avg_order_total >=1
+ORDER BY avg_orer_total DESC;
+
+
+
+
 
 
 
