@@ -306,6 +306,56 @@ SORT BY o.order_date ASC;
 
 
 
+Problem 16
+Write a query that returns a result set containing the customer ID, customer first name, customer last name, order ID, order date, and order total for each customer’s orders. Include customer data even if the customer hasn’t placed an order. If the customer hasn’t placed an order, then the customer’s order information should be NULL. Sort the result set by order date, ascending.
+
+SELECT c.customer_id, c.cust_first_name, c.cust_last_name, o.order_id, o.order_date, o.order_total
+FROM  oe.customers AS c
+LEFT JOIN oe.orders AS o
+ON c.customer_id = o.customer_id 
+ORDER BY o.order_date ASC;
+
+
+Problem 17
+Write a query that returns a result set containing the containing the number of orders placed for each NLS territory. Alias the number of orders placed as “order_count.” Include NLS territory values even if customers from the territory have not placed an order. Sort the result set by NLS Territory, ascending.
+
+SELECT c.nls_territory, COUNT(o.order_id) AS order_count
+FROM oe.customers AS c
+LEFT JOIN oe.orders AS o
+ON c.customer_id = o.customer_id
+GROUP BY c.nls_territory 
+ORDER BY c.nls_terrotory ASC: 
+
+
+
+Problem 18
+Write a query that returns a result set containing the containing the marital status, cheapest order made by a customer of the corresponding marital status, most expensive order made by a customer of the corresponding marital status, and the sum of all order total values for the corresponding marital status. Alias the cheapest order total as “cheapest_order,” most expensive order as “most_expensive_order,” and the sum of all order totals as “combined_order_total.”
+
+SELECT c.marital_status, MIN(o.order_total) AS cheapest_order, MAX(o.order_total) AS most_expensive_order, SUM(o.order_total) AS combined_order_total
+FROM oe.customers AS c 
+INNER JOIN oe.orders AS o
+ON c.customer_id = o.customer_id 
+GROUP BY c.customer_id;
+
+Problem 19
+Write a query that returns a result set containing the customer ID, customer first name, customer last name, order ID, order date, and order total for all 
+orders with an order total greater than or equal to 1.5 times the average order total. Sort the result set by order total, descending.
+
+SELECT c.customer_id, c.cust_first_name, c.cust_last_name, o.order_id, o.order_date, o.order_total 
+FROM oe.customers AS c
+INNER JOIN oe.orders AS o
+ON c.customer_id = o.customer_id 
+WHERE o.order_total >= ( 
+              SELECT AVG(o.order_total) *1.5
+              FROM oe.orders AS o
+      )
+ORDER BY o.order_total DESC;
+
+
+
+
+
+
 
 
 
