@@ -277,7 +277,16 @@ GROUP BY c.income_level
 ORDER BY c.income_level ASC;
 
 
+Problem 14
+Write a query that returns a result set containing the customer ID, customer first name, customer last name, order ID, and order total for each customer order. Only include orders for married customers located in America. Sort the result set by order date, descending.
 
+SELECT c.customer_id, c.cust_first_name, c.cust_last_name, o.order_id, o.order_total
+FROM oe.customers AS c
+INNER JOIN oe.orders AS o
+ON c.customer_id=o.customer_id
+WHERE c.marital_status='married' 
+AND c.nls_territory ='America'
+ORDER BY o.order_date DESC; 
 
 
 
