@@ -266,6 +266,15 @@ HAVING COUNT(avg_order_total >=1
 ORDER BY avg_orer_total DESC;
 
 
+Problem 13
+Compute/retrieve the number of orders place by customer income level. Include income levels even if no orders have been placed by customers with the corresponding income level. The income level category should be the first column in your result set. Alias the number of orders as “order_count.” Sort the result set by income level, ascending.
+
+SELECT c.income_level, COUNT(o.order_id) AS order_count 
+FROM oe.customers AS c
+LEFT JOIN oe.orders AS o
+ON c.customer_id = o.order_id
+GROUP BY c.income_level
+ORDER BY c.income_level ASC;
 
 
 
