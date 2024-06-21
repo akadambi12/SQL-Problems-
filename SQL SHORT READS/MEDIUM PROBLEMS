@@ -186,6 +186,16 @@ Each row should consist of child category and parent category (i.e., 1 level abo
 “parent_category_name” and the parent category description as “parent_category_description.” Sort the result set by the child category ID, 
 ascending.
 
+SELECT c1.categoriy_id AS child_categroy_id 
+       c1,parent_category_id, 
+       c1.category_name, 
+       c1.category_description, 
+       c2.category_name AS parent_category_name,
+       c2.category_description AS parent_category_description
+FROM oe.categories_tab c1
+LEFT JOIN oe_categories_tab  c2
+ON c1.parent_category_id = c2.category_id
+ORDER BY c1.child_category_id ASC;
 
 
 
