@@ -336,7 +336,7 @@ SELECT c.marital_status, MIN(o.order_total) AS cheapest_order, MAX(o.order_total
 FROM oe.customers AS c 
 INNER JOIN oe.orders AS o
 ON c.customer_id = o.customer_id 
-GROUP BY c.customer_id;
+GROUP BY c.customer_marital_status;
 
 Problem 19
 Write a query that returns a result set containing the customer ID, customer first name, customer last name, order ID, order date, and order total for all 
