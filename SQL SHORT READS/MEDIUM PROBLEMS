@@ -354,6 +354,37 @@ ORDER BY o.order_total DESC;
 
 
 
+Problem 20
+Write a query that returns a result set containing the details of the first order placed based on the order date. The result set should include order ID, order date, order total, line-item ID,
+product ID, product name, unit price, and quantity.  There should be one row for each line-item. Sort the result set by line-item ID, ascending.
+
+SELECT 
+    o.order_id, 
+    o.order_date, 
+    o.order_total, 
+    i.line_item_id, 
+    i.product_id, 
+    p.product_name, 
+    i.unit_price, 
+    i.quantity
+FROM 
+    oe.orders AS o
+INNER JOIN 
+    oe.order_items AS i
+ON 
+    o.order_id = i.order_id
+INNER JOIN 
+    oe.product_information AS p
+ON 
+    i.product_id = p.product_id
+WHERE 
+    o.order_date = (
+        SELECT MIN(order_date) 
+        FROM oe.orders
+    )
+ORDER BY 
+    i.line_item_id ASC;
+
 
 
 
