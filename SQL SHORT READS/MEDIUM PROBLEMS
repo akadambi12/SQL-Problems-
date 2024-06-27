@@ -329,7 +329,8 @@ ORDER BY c.nls_terrotory ASC:
 
 
 Problem 18
-Write a query that returns a result set containing the containing the marital status, cheapest order made by a customer of the corresponding marital status, most expensive order made by a customer of the corresponding marital status, and the sum of all order total values for the corresponding marital status. Alias the cheapest order total as “cheapest_order,” most expensive order as “most_expensive_order,” and the sum of all order totals as “combined_order_total.”
+Write a query that returns a result set containing the containing the marital status, cheapest order made by a customer of the corresponding marital status, 
+most expensive order made by a customer of the corresponding marital status, and the sum of all order total values for the corresponding marital status. Alias the cheapest order total as “cheapest_order,” most expensive order as “most_expensive_order,” and the sum of all order totals as “combined_order_total.”
 
 SELECT c.marital_status, MIN(o.order_total) AS cheapest_order, MAX(o.order_total) AS most_expensive_order, SUM(o.order_total) AS combined_order_total
 FROM oe.customers AS c 
