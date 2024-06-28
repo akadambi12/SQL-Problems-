@@ -386,6 +386,51 @@ ORDER BY
     i.line_item_id ASC;
 
 
+Problem 21
+Write a query that returns a result set containing details of each sales representative’s largest order based on order total. 
+The result set should include the sales representative’s ID, the customer ID the representative made the sale to, order ID, and order total. Sort the result set by order total, descending.
+
+SELECT
+    oe.orders.sales_rep_id,
+    oe.orders.customer_id,
+    oe.orders.order_id,
+    oe.orders.order_total
+FROM
+    oe.orders
+    INNER JOIN (
+    SELECT
+        oe.orders.sales_rep_id,
+        MAX(oe.orders.order_total) max_order_total
+    FROM
+        oe.orders
+    GROUP BY
+        oe.orders.sales_rep_id
+    ) max_order
+        ON oe.orders.sales_rep_id = max_order.sales_rep_id
+        AND oe.orders.order_total = max_order.max_order_total
+ORDER BY
+    oe.orders.order_total DESC;
+
+
+
+Problem 22
+Write a query that returns a result set containing the order ID, order date, and order total for each order. Instead of using the already existing order total column in the orders table, create a derived column that takes the sum of unit price multiplied by quantity for each line item in each order. If done properly, the derived column and the original order total column will contain the same value.
+Alias the derived column as “manual_order_total.” Sort the result set by the derived column, descending.
+
+
+SELECT o.order_id,
+       o.order_date,
+       manual_order_totals.manual_order_total
+FROM oe.orders AS o
+INNER JOIN (
+      SELECT oe.orders.order_id, 
+             SUM(oe.order_items.unit_price * oe.order_items.quantity) AS manual_order_total
+      FROM oe.order_items
+      GROUP BY oe.orders.order_id 
+) AS manual_order_totals
+ON o.order_id = manual_order_totals.order_id 
+ORDER BY manual_order_total DESC;
+
 
 
 
